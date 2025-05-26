@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy 34th Monthsary!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #ffe6f0, #ffcce0, #ffe6f0);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #4b004f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      font-size: 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      animation: pulse 1s infinite;
+      margin: 10px;
+    }
+
+    .btn-secondary {
+      background-color: #ffb6c1;
+      color: #4b004f;
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .image-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .image-group img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 3px solid #ff69b4;
+    }
+
+    .message {
+      font-size: 14px;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ffb6c1;
+      margin-top: 20px;
+      color: #4b004f;
+      max-width: 90%;
+      white-space: pre-line;
+    }
+
+    .floating {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      opacity: 0.8;
+      animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); opacity: 1; }
+      100% { transform: translateY(110vh) translateX(20px); opacity: 0; }
+    }
+
+    @keyframes fade {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-20px); }
+    }
+
+    h2 {
+      text-shadow: 0 0 10px #ff69b4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Part 1 -->
+  <div id="part1">
+    <h1>Hi Langga koo, hihihihi! 💖</h1>
+    <button class="btn" onclick="showPart2()">Press Me!</button>
+  </div>
+
+  <!-- Part 2 -->
+  <div id="part2" class="hidden">
+    <h2>Happy 34th Monthsary!</h2>
+    <div class="image-group">
+      <img src="IMG_2318.JPG" alt="Photo 1" />
+      <img src="IMG_2436.JPG" alt="Photo 2" />
+      <img src="IMG_2394.JPG" alt="Photo 3" />
+    </div>
+    <button class="btn" onclick="showPart3()">Next</button>
+    <button class="btn btn-secondary" onclick="backToPart1()">Back</button>
+  </div>
+
+  <!-- Part 3 -->
+  <div id="part3" class="hidden">
+    <div class="message" id="typed-message"></div>
+    <button class="btn" onclick="showPart4()">Next</button>
+    <button class="btn btn-secondary" onclick="backToPart2()">Back</button>
+  </div>
+
+  <!-- Part 4 -->
+  <div id="part4" class="hidden">
+    <h2>HIHIHIHI, KELEG 🎵</h2>
+    <button class="btn" onclick="window.open('https://www.youtube.com/watch?v=rKNYV2RlRKY&t=54s', '_blank')">
+      TAP MO POO SKSKSKSKS! 💖
+    </button>
+    <button class="btn btn-secondary" onclick="backToPart3()">Back</button>
+  </div>
+
+  <!-- Floating emoji container -->
+  <div id="emoji-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    function showPart2() {
+      document.getElementById("part1").classList.add("hidden");
+      document.getElementById("part2").classList.remove("hidden");
+      confetti();
+    }
+
+    function backToPart1() {
+      document.getElementById("part2").classList.add("hidden");
+      document.getElementById("part1").classList.remove("hidden");
+    }
+
+    function showPart3() {
+      document.getElementById("part2").classList.add("hidden");
+      document.getElementById("part3").classList.remove("hidden");
+      document.getElementById("typed-message").innerHTML = "";
+      i = 0;
+      typeWriter();
+    }
+
+    function backToPart2() {
+      document.getElementById("part3").classList.add("hidden");
+      document.getElementById("part2").classList.remove("hidden");
+    }
+
+    function showPart4() {
+      document.getElementById("part3").classList.add("hidden");
+      document.getElementById("part4").classList.remove("hidden");
+    }
+
+    function backToPart3() {
+      document.getElementById("part4").classList.add("hidden");
+      document.getElementById("part3").classList.remove("hidden");
+    }
+
+    // Floating emojis
+    const emojis = ["💖", "🌸", "💘", "🌷", "💕"];
+    const container = document.getElementById("emoji-container");
+    setInterval(() => {
+      const emoji = document.createElement("div");
+      emoji.classList.add("floating");
+      emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.fontSize = (Math.random() * 10 + 20) + "px";
+      container.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 10000);
+    }, 500);
+
+    // Mouse heart trail
+    document.addEventListener("mousemove", function(e) {
+      const heart = document.createElement("div");
+      heart.innerText = "💖";
+      heart.style.position = "absolute";
+      heart.style.left = e.pageX + "px";
+      heart.style.top = e.pageY + "px";
+      heart.style.pointerEvents = "none";
+      heart.style.fontSize = "20px";
+      heart.style.animation = "fade 1s ease-out";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    });
+
+    // Typing message
+    const text = `
+      Happy monthsary my Langga! 💕\n
+      I just want you to know that I am always so proud of you! 🌟\n
+      Thank you for loving, understanding, and caring for me. 💗\n
+      Too many ups and downs, still we are holding each other. 🤝\n
+      Stay healthy and masungit to me. 😆\n
+      More years to come, My Future Wife! I Love You Always Langga! 💖
+    `;
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typed-message").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+  </script>
+</body>
+</html>
